@@ -1,10 +1,19 @@
 ﻿using System;
+using System.Threading.Tasks;
+
 namespace CustomerVisitPlan.Data
 {
-    public class UnitOfWork
+    public class UnitOfWork:IUnitOfWork
     {
-        public UnitOfWork()
+        private readonly ApplicationDbContext context;
+        public UnitOfWork(ApplicationDbContext context)
         {
+            this.context = context;
+        }
+
+        public async Task<int> SaveChangesAsync()
+        {
+            return await this.context.SaveChangesAsync();
         }
     }
 }
