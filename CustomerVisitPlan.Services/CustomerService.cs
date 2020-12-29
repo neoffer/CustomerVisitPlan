@@ -15,9 +15,17 @@ namespace CustomerVisitPlan.Services
             this.customerRepository = customerRepository;
             this.unitOfWork = unitOfWork;
         }
-        public Task<bool> Delete(string id)
+        public async Task<bool> Delete(string id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await customerRepository.Delete(id);
+                await unitOfWork.SaveChangesAsync();
+            } catch (Exception)
+            {
+                return false;
+            }
+            return true;
         }
 
         public Task<Customer> Get(string id)
