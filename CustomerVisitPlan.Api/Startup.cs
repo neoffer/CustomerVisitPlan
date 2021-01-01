@@ -8,10 +8,11 @@ using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
-using CustomerVisitPlan.Api.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using CustomerVisitPlan.Data;
+using CustomerVisitPlan.Services;
 
 namespace CustomerVisitPlan.Api
 {
@@ -32,9 +33,13 @@ namespace CustomerVisitPlan.Api
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
+
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<ICustomerService, CustomerService>();
+            services.AddScoped<ICityService, CityService>();
+            services.AddScoped<IRegionService, RegionService>();
+            services.AddScoped<IVisitPlanService, VisitPlanService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

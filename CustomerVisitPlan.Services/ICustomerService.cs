@@ -8,7 +8,7 @@ namespace CustomerVisitPlan.Services
     public interface ICustomerService
     {
         Task<Customer> Get(string id);
-        IList<Customer> GetAll();
+        Task<IList<Customer>> GetAll();
 
         Task<bool> Insert(Customer entity);
         Task<bool> Update(Customer entity);

@@ -6,20 +6,20 @@ using CustomerVisitPlan.Model;
 
 namespace CustomerVisitPlan.Services
 {
-    public class RegionService : IRegionService
+    public class VisitPlanService : IVisitPlanService
     {
-        private readonly IRepository<Region> regionRepository;
+        private readonly IRepository<VisitPlan> visitPlanRepository;
         private readonly IUnitOfWork unitOfWork;
-        public RegionService(IRepository<Region> regionRepository, IUnitOfWork unitOfWork)
+        public VisitPlanService(IRepository<VisitPlan> visitPlanRepository, IUnitOfWork unitOfWork)
         {
-            this.regionRepository = regionRepository;
+            this.visitPlanRepository = visitPlanRepository;
             this.unitOfWork = unitOfWork;
         }
         public async Task<bool> Delete(string id)
         {
             try
             {
-                await regionRepository.Delete(id);
+                await visitPlanRepository.Delete(id);
                 await unitOfWork.SaveChangesAsync();
             } catch (Exception)
             {
@@ -28,21 +28,21 @@ namespace CustomerVisitPlan.Services
             return true;
         }
 
-        public async Task<Region> Get(string id)
+        public async Task<VisitPlan> Get(string id)
         {
-            return await regionRepository.Get(id);
+            return await visitPlanRepository.Get(id);
         }
 
-        public async Task<IList<Region>> GetAll()
+        public async Task<IList<VisitPlan>> GetAll()
         {
-            return await regionRepository.GetAll();
+            return await visitPlanRepository.GetAll();
         }
 
-        public async Task<bool> Insert(Region entity)
+        public async Task<bool> Insert(VisitPlan entity)
         {
             try
             {
-                regionRepository.Insert(entity);
+                visitPlanRepository.Insert(entity);
                 await unitOfWork.SaveChangesAsync();
             }
             catch (Exception)
@@ -52,11 +52,11 @@ namespace CustomerVisitPlan.Services
             return true;
         }
 
-        public async Task<bool> Update(Region entity)
+        public async Task<bool> Update(VisitPlan entity)
         {
             try
             {
-                regionRepository.Update(entity);
+                visitPlanRepository.Update(entity);
                 await unitOfWork.SaveChangesAsync();
             }
             catch (Exception)

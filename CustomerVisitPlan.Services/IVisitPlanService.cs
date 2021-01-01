@@ -5,7 +5,7 @@ using CustomerVisitPlan.Model;
 
 namespace CustomerVisitPlan.Services
 {
-    public interface IRegionService
+    public interface IVisitPlanService
     {
         Task<Region> Get(string id);
         Task<IList<Region>> GetAll();

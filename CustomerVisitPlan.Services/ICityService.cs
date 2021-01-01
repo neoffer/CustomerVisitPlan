@@ -5,13 +5,13 @@ using CustomerVisitPlan.Model;
 
 namespace CustomerVisitPlan.Services
 {
-    public interface ICustomerService
+    public interface ICityService
     {
-        Task<Customer> Get(string id);
-        Task<IList<Customer>> GetAll();
+        Task<City> Get(string id);
+        Task<IList<City>> GetAll();
 
-        Task<bool> Insert(Customer entity);
-        Task<bool> Update(Customer entity);
+        Task<bool> Insert(City entity);
+        Task<bool> Update(City entity);
         Task<bool> Delete(string id);
     }
 

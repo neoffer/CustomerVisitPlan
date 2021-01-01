@@ -28,24 +28,42 @@ namespace CustomerVisitPlan.Services
             return true;
         }
 
-        public Task<Customer> Get(string id)
+        public async Task<Customer> Get(string id)
         {
-            throw new NotImplementedException();
+            return await customerRepository.Get(id);
         }
 
-        public IList<Customer> GetAll()
+        public async Task<IList<Customer>> GetAll()
         {
-            throw new NotImplementedException();
+            return await customerRepository.GetAll();
         }
 
-        public Task<bool> Insert(Customer entity)
+        public async Task<bool> Insert(Customer entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                customerRepository.Insert(entity);
+                await unitOfWork.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
         }
 
-        public Task<bool> Update(Customer entity)
+        public async Task<bool> Update(Customer entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                customerRepository.Update(entity);
+                await unitOfWork.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

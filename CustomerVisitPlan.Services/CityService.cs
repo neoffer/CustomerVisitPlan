@@ -6,20 +6,20 @@ using CustomerVisitPlan.Model;
 
 namespace CustomerVisitPlan.Services
 {
-    public class CustomerService : ICustomerService
+    public class CityService : ICityService
     {
-        private readonly IRepository<Customer> customerRepository;
+        private readonly IRepository<City> cityRepository;
         private readonly IUnitOfWork unitOfWork;
-        public CustomerService(IRepository<Customer> customerRepository, IUnitOfWork unitOfWork)
+        public CityService(IRepository<City> cityRepository, IUnitOfWork unitOfWork)
         {
-            this.customerRepository = customerRepository;
+            this.cityRepository = cityRepository;
             this.unitOfWork = unitOfWork;
         }
         public async Task<bool> Delete(string id)
         {
             try
             {
-                await customerRepository.Delete(id);
+                await cityRepository.Delete(id);
                 await unitOfWork.SaveChangesAsync();
             } catch (Exception)
             {
@@ -28,21 +28,21 @@ namespace CustomerVisitPlan.Services
             return true;
         }
 
-        public async Task<Customer> Get(string id)
+        public async Task<City> Get(string id)
         {
-            return await customerRepository.Get(id);
+            return await cityRepository.Get(id);
         }
 
-        public async Task<IList<Customer>> GetAll()
+        public async Task<IList<City>> GetAll()
         {
-            return await customerRepository.GetAll();
+            return await cityRepository.GetAll();
         }
 
-        public async Task<bool> Insert(Customer entity)
+        public async Task<bool> Insert(City entity)
         {
             try
             {
-                customerRepository.Insert(entity);
+                cityRepository.Insert(entity);
                 await unitOfWork.SaveChangesAsync();
             }
             catch (Exception)
@@ -52,11 +52,11 @@ namespace CustomerVisitPlan.Services
             return true;
         }
 
-        public async Task<bool> Update(Customer entity)
+        public async Task<bool> Update(City entity)
         {
             try
             {
-                customerRepository.Update(entity);
+                cityRepository.Update(entity);
                 await unitOfWork.SaveChangesAsync();
             }
             catch (Exception)

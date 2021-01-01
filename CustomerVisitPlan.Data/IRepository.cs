@@ -8,7 +8,7 @@ namespace CustomerVisitPlan.Data
     public interface IRepository<T> where T : BaseEntity
     {
         Task<T> Get(string id);
-        IList<T> GetAll();
+        Task<IList<T>> GetAll();
 
         void Insert(T entity);
         void Update(T entity);
